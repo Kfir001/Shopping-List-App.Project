@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#4caf50" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="description" content="רשימת קניות אינטראקטיבית" />
+    <title>רשימת קניות</title>
+    <link
+      rel="manifest"
+      href="data:application/json;base64,eyJuYW1lIjoi16jXqdeZ157XqiDXp9eg15nXldeqIiwic2hvcnRfbmFtZSI6Iteq15PXqNeZ157XldeqIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0IiwidGhlbWVfY29sb3IiOiIjNGNhZjUwIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZmZmZmYifQ=="
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <!-- Modern Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+    />
+  </head>
+  <body>
+    <!-- Cart Icon Container -->
+    <div id="cart-icon" role="button" tabindex="0" aria-label="הצג רשימת קניות">
+      🛒
+    </div>
+
+    <!-- Shopping List Modal -->
+    <div
+      id="cart-modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>רשימת הקניות שלי</h2>
+          <button class="close-modal" aria-label="סגור">×</button>
+        </div>
+        <div class="modal-body">
+          <div id="share-list"></div>
+          <div class="share-buttons">
+            <button id="copy-list" class="share-button">
+              <span class="material-icons-round">content_copy</span>
+              העתק רשימה
+            </button>
+            <button id="share-list-button" class="share-button">
+              <span class="material-icons-round">share</span>
+              שתף רשימה
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <h1>רשימת קניות</h1>
+
+      <div class="controls">
+        <button id="theme-toggle" aria-label="שינוי מצב תצוגה" type="button">
+          <span class="material-icons-round light-icon">light_mode</span>
+          <span class="material-icons-round dark-icon">dark_mode</span>
+        </button>
+        <div class="sort-container">
+          <label for="sort-select">מיין לפי:</label>
+          <select id="sort-select" name="sort" aria-label="מיין רשימה">
+            <option value="added">סדר הוספה</option>
+            <option value="alpha">א-ב</option>
+            <option value="category">קטגוריה</option>
+            <option value="completed">הושלמו</option>
+          </select>
+        </div>
+      </div>
+
+      <form
+        id="shopping-form"
+        name="shopping-form"
+        class="input-container"
+        onsubmit="return false;"
+      >
+        <select id="category-select" name="category" aria-label="בחר קטגוריה">
+          <option value="כללי">כללי</option>
+          <option value="פירות וירקות">פירות וירקות</option>
+          <option value="מוצרי חלב">מוצרי חלב</option>
+          <option value="בשר ודגים">בשר ודגים</option>
+          <option value="שתייה">שתייה</option>
+        </select>
+
+        <input
+          type="text"
+          id="item-input"
+          name="item"
+          placeholder="הוסף פריט חדש..."
+          aria-label="הזן פריט חדש"
+          autocomplete="off"
+          autocapitalize="off"
+          enterkeyhint="done"
+          required
+        />
+
+        <button
+          type="submit"
+          id="add-button"
+          name="add-button"
+          aria-label="הוסף פריט"
+        >
+          <span class="material-icons-round">add_shopping_cart</span>
+        </button>
+      </form>
+
+      <div id="stats" role="status" aria-live="polite">
+        <span id="total-items">סה"כ פריטים: 0</span>
+        <span id="completed-items">הושלמו: 0</span>
+      </div>
+
+      <ul id="shopping-list" role="list" aria-label="רשימת קניות"></ul>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
